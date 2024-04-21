@@ -11,13 +11,10 @@ CORS(app)
 # Load ONNX model
 ort_session = ort.InferenceSession('model_rtdetr_r18vd_6x_orig.onnx')
 
-@app.route('/detect_qr_codes', methods=['POST'])
-def detect_qr_codes():
+def detect_qr_codes_logic(image_file):
     # Check if the POST request has a file part
-    if 'image' not in request.files:
+    if 'image' not in image_file:
         return 'No image found in request', 400
-
-    image_file = request.files['image']
 
     # Ensure file is an image
     if not image_file.filename.lower().endswith(('.png', '.jpg', '.jpeg')):
@@ -58,6 +55,12 @@ def detect_qr_codes():
     image.save(image_bytes, format='PNG')
     image_bytes.seek(0)
 
+    return image_bytes
+
+@app.route('/detect_qr_codes', methods=['POST'])
+def detect_qr_codes():
+    image_file = request.files['image']
+    image_bytes = detect_qr_codes_logic(image_file)
     return send_file(image_bytes, mimetype='image/png')
 
 if __name__ == '__main__':
