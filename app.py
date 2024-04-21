@@ -1,6 +1,6 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 import numpy as np
 import io
 import onnxruntime as ort
