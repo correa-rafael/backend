@@ -1,6 +1,6 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import io
 import onnxruntime as ort
@@ -11,10 +11,13 @@ CORS(app)
 # Load ONNX model
 ort_session = ort.InferenceSession('model_rtdetr_r18vd_6x_orig.onnx')
 
-def detect_qr_codes_logic(image_file):
+@app.route('/detect_qr_codes', methods=['POST'])
+def detect_qr_codes():
     # Check if the POST request has a file part
-    if 'image' not in image_file:
+    if 'image' not in request.files:
         return 'No image found in request', 400
+
+    image_file = request.files['image']
 
     # Ensure file is an image
     if not image_file.filename.lower().endswith(('.png', '.jpg', '.jpeg')):
@@ -55,12 +58,6 @@ def detect_qr_codes_logic(image_file):
     image.save(image_bytes, format='PNG')
     image_bytes.seek(0)
 
-    return image_bytes
-
-@app.route('/detect_qr_codes', methods=['POST'])
-def detect_qr_codes():
-    image_file = request.files['image']
-    image_bytes = detect_qr_codes_logic(image_file)
     return send_file(image_bytes, mimetype='image/png')
 
 if __name__ == '__main__':
