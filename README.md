@@ -14,7 +14,16 @@ The QR Code Detection Backend is a server-side application responsible for handl
 
 ## Deployment
 
-The backend of the QR Code Detection Backend is deployed on the [Adaptable](https://qr-detection-app-backend.adaptable.app) platform, ensuring reliable and scalable performance for handling image processing tasks and serving API requests. The frontend is deployed on [Vercel](https://qr-detection-app.vercel.app/), implemented in the [qr-detection-app](https://github.com/correa-rafael/qr-detection-app/) repository.
+The backend of the QR Code Detection is deployed on the [Adaptable](https://qr-detection-app-backend.adaptable.app) platform, ensuring reliable and scalable performance for handling image processing tasks and serving API requests. It works in conjunction with the frontend application, with the frontend handling user interactions and the backend performing the heavy lifting of image processing and AI-based QR code detection. The frontend is deployed on [Vercel](https://qr-detection-app.vercel.app/), implemented in the [qr-detection-app](https://github.com/correa-rafael/qr-detection-app/) repository.
+
+## Installation
+
+To run the QR Code Detection Backend locally, follow these steps:
+
+1. Clone this repository.
+2. Navigate to the project directory.
+3. Install dependencies using `pip install -r requirements.txt`.
+4. Start the Flask server using `python app.py`.
 
 ## Usage
 
