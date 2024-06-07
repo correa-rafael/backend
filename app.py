@@ -36,7 +36,7 @@ def detect_qr_codes():
 
     # Draw bounding boxes on the original image
     draw = ImageDraw.Draw(image)
-    threshold = 0.4
+    threshold = 0.6
 
     for i in range(image_data.shape[0]):
         scr = scores[i]
