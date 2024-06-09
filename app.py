@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load ONNX model
-ort_session = ort.InferenceSession('model_rtdetr_r18vd_6x_orig.onnx')
+ort_session = ort.InferenceSession('model_rtdetr_r18vd_6x_orig.ort')
 
 @app.route('/detect_qr_codes', methods=['POST'])
 def detect_qr_codes():
